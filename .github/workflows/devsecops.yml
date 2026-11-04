@@ -57,19 +57,21 @@ jobs:
         run: |
           npm install --legacy-peer-deps
           npm test
-      - name: SonarQube Cloud scan
+      - name: SonarQube scan
         uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_SCANNER_OPTS: -Xmx384m
         with:
           args: >
-            -X
             -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
             -Dsonar.sources=src
             -Dsonar.tests=tests
             -Dsonar.test.inclusions=tests/**/*.test.js
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.javascript.node.maxspace=512
+            -Dsonar.scanner.skipSystemTruststore=true
             -Dsonar.qualitygate.wait=true
 
 #   sast:
