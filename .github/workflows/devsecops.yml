@@ -52,6 +52,7 @@ jobs:
           node-version: "24"
           cache: npm
           cache-dependency-path: package-lock.json
+
       - name: Install dependencies and generate coverage
         run: |
           npm install --legacy-peer-deps
@@ -63,6 +64,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
+            -X
             -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }} 
             -Dsonar.sources=src
             -Dsonar.tests=tests
