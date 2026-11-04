@@ -1,0 +1,18 @@
+# Documentation/configuration reference for the project's intended policy.
+# Enforcement is currently implemented in .github/workflows/devsecops.yml.
+policy:
+  sast:
+    quality_gate: required
+  sca:
+    fail_on_severity: high
+  secrets:
+    any_verified_secret: fail
+  container:
+    fail_on_severity: [HIGH, CRITICAL]
+    ignore_unfixed: true
+  exceptions:
+    require:
+      - ticket
+      - owner
+      - justification
+      - expiry_date

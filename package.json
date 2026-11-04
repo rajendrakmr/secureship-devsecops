@@ -1,0 +1,27 @@
+{
+  "name": "secureship-devsecops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Node.js API for an end-to-end GitHub Actions DevSecOps learning project",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "jest --runInBand --coverage",
+    "test:ci": "jest --runInBand --coverage --ci",
+    "lint": "eslint src tests"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "helmet": "^8.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

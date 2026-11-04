@@ -1,0 +1,17 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: secureship-nodejs:local
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      API_KEY: ${API_KEY:?Set API_KEY in your shell or .env file}
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
