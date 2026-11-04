@@ -23,7 +23,7 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Run lint
         run: npm run lint
@@ -51,7 +51,7 @@ jobs:
           cache-dependency-path: package-lock.json
       - name: Install dependencies and generate coverage
         run: |
-          npm install
+          npm install --legacy-peer-deps
           npm test
       - name: SonarQube Cloud scan
         uses: SonarSource/sonarqube-scan-action@v8
