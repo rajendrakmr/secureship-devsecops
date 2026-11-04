@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  tests:
+  test:
     name: Build and unit tests
     runs-on: self-hosted
     steps:
@@ -28,6 +28,40 @@ jobs:
 
       - name: Run Test
         run: npm run test
+  sast:
+    name: SonarQube cloude Sast
+    runs-on: self-hosted
+    needs: test  
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install dependencies and generate coverage
+        run: |
+          npm install
+          npm test
+      - name: SonarQube Cloud scan
+        uses: SonarSource/sonarqube-scan-action@v8
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }} 
+            -Dsonar.sources=src
+            -Dsonar.tests=tests
+            -Dsonar.test.inclusions=tests/**/*.test.js
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.qualitygate.wait=true
 
  
 #   sast:
