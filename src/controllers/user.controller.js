@@ -1,8 +1,6 @@
 const userService = require('../services/user.service');
 
 function listUsers(_req, res) {
-  const AWS_ACCESS_KEY_ID="AKIAIOSFODNN7EXAMPLE"
-  const AWS_SECRET_ACCESS_KEY="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
   return res.status(200).json({ data: userService.getAllUsers() });
 }
 
