@@ -64,14 +64,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_SCANNER_OPTS: -Xmx384m
         with:
-          args: >
-            -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
-            -Dsonar.sources=src
-            -Dsonar.tests=tests
-            -Dsonar.test.inclusions=tests/**/*.test.js
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.javascript.node.maxspace=512
-            -Dsonar.scanner.skipSystemTruststore=true
+          args: > 
             -Dsonar.qualitygate.wait=true
 
 #   sast:
